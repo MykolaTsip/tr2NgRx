@@ -1,4 +1,7 @@
 import {Component, AfterViewInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {clear, countSelector, decrease, increase} from './reducers/counter';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -6,30 +9,28 @@ import {Component, AfterViewInit} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  counter = 0;
   updateAt: number;
-
-  get disabletButton(): boolean {
-    return this.counter <= 0;
+  storeCount$ = this.store.select(countSelector);
+  disableCount$ = this.storeCount$.pipe(
+    map(
+      value => value <= 0
+    )
+  );
+  constructor(private store: Store) {
   }
 
-
   decrease(): void {
-    this.counter++;
+    this.store.dispatch(decrease());
     this.updateAt = Date.now();
   }
 
   increase(): void {
-    this.counter--;
+    this.store.dispatch(increase());
     this.updateAt = Date.now();
   }
 
   clear(): void {
-    this.counter = 0;
+    this.store.dispatch(clear());
     this.updateAt = Date.now();
   }
-
-  // ngAfterViewInit(): void {
-  //   this.updateAt = Date.now();
-  // }
 }

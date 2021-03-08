@@ -1,8 +1,8 @@
-<button class="f-s m-2" (click)="decrease()">decrease</button>
-<button class="f-s m-2" (click)="increase()" [disabled]="disabletButton">increase</button>
-<button class="f-s m-2"  (click)="clear()" [disabled]="disabletButton">clear</button>
+<button class="f-s m-2" (click)="decrease()" [disabled]="disableCount$ | async">decrease</button>
+<button class="f-s m-2" (click)="increase()">increase</button>
+<button class="f-s m-2"  (click)="clear()" [disabled]="disableCount$ | async">clear</button>
 <p class="f-s">
-  Count is: {{this.counter}}
+  Count is: {{this.storeCount$ | async}}
 </p>
 <p class="f-s" *ngIf="updateAt">
   Updated at: {{this.updateAt | date : 'HH:mm:ss'}}
