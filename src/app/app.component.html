@@ -1,9 +1,9 @@
-<button class="f-s m-2" (click)="decrease()" [disabled]="disableCount$ | async">decrease</button>
+<button class="f-s m-2" (click)="decrease()" [disabled]="validCount$ | async">decrease</button>
 <button class="f-s m-2" (click)="increase()">increase</button>
-<button class="f-s m-2"  (click)="clear()" [disabled]="disableCount$ | async">clear</button>
+<button class="f-s m-2"  (click)="clear()" [disabled]="validCount$ | async">clear</button>
 <p class="f-s">
-  Count is: {{this.storeCount$ | async}}
+  Count is: {{this.count$ | async}}
 </p>
-<p class="f-s" *ngIf="updateAt">
-  Updated at: {{this.updateAt | date : 'HH:mm:ss'}}
+<p class="f-s" *ngIf="updatedAt$">
+  Updated at: {{this.updatedAt$ | async | date : 'HH:mm:ss'}}
 </p>
